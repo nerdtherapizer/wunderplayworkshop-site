@@ -1,174 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Forge Token</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Forge Token</title>
 
-  <style>
-    :root {
-      --bg-top: #050505;
-      --bg-bottom: #140a05;
-      --ember: 255, 140, 40;
-      --text: #f4e6d3;
-      --muted: #c9a77a;
-      --button-bg: rgba(255, 140, 40, 0.14);
-      --button-border: rgba(255, 170, 90, 0.45);
-      --button-hover: rgba(255, 160, 70, 0.22);
-    }
+<style>
+:root{
+--bg-top:#050505;
+--bg-bottom:#140a05;
+--ember:255,140,40;
+--text:#f4e6d3;
+--muted:#c9a77a;
+--button-bg:rgba(255,140,40,.14);
+--button-border:rgba(255,170,90,.45);
+--button-hover:rgba(255,160,70,.22);
+}
 
-    * {
-      box-sizing: border-box;
-    }
+*{box-sizing:border-box;}
 
-    html, body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 50% 85%, rgba(var(--ember), 0.18), transparent 28%),
-        linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
-      color: var(--text);
-      font-family: Georgia, "Times New Roman", serif;
-    }
+html,body{
+margin:0;
+width:100%;
+height:100%;
+overflow:hidden;
+background:
+radial-gradient(circle at 50% 85%,rgba(var(--ember),.18),transparent 28%),
+linear-gradient(to bottom,var(--bg-top),var(--bg-bottom));
+color:var(--text);
+font-family:Georgia,"Times New Roman",serif;
+}
 
-    body {
-      position: relative;
-      display: grid;
-      place-items: center;
-      isolation: isolate;
-    }
+body{
+position:relative;
+display:grid;
+place-items:center;
+isolation:isolate;
+}
 
-    .forge-glow {
-      position: absolute;
-      inset: auto 50% 8%;
-      width: min(60vw, 420px);
-      height: min(18vw, 120px);
-      transform: translateX(-50%);
-      border-radius: 999px;
-      background: radial-gradient(
-        ellipse at center,
-        rgba(255, 120, 30, 0.28) 0%,
-        rgba(255, 90, 20, 0.12) 35%,
-        rgba(255, 70, 10, 0.03) 60%,
-        transparent 75%
-      );
-      filter: blur(20px);
-      animation: pulseGlow 4.2s ease-in-out infinite;
-      z-index: -2;
-      pointer-events: none;
-    }
+.forge-glow{
+position:absolute;
+inset:auto 50% 8%;
+width:min(60vw,420px);
+height:min(18vw,120px);
+transform:translateX(-50%);
+border-radius:999px;
+background:radial-gradient(
+ellipse at center,
+rgba(255,120,30,.28)0%,
+rgba(255,90,20,.12)35%,
+rgba(255,70,10,.03)60%,
+transparent 75%);
+filter:blur(20px);
+animation:pulseGlow 4.2s ease-in-out infinite;
+z-index:-2;
+}
 
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
-      50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
-    }
+@keyframes pulseGlow{
+0%,100%{opacity:.7;transform:translateX(-50%) scale(1);}
+50%{opacity:1;transform:translateX(-50%) scale(1.08);}
+}
 
-    canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      pointer-events: none;
-    }
+canvas{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
 
-    .content {
-      width: min(92vw, 640px);
-      text-align: center;
-      padding: 1.5rem;
-      animation: fadeIn 1.4s ease-out both;
-    }
+.content{
+width:min(92vw,640px);
+text-align:center;
+padding:1.5rem;
+animation:fadeIn 1.4s ease-out both;
+}
 
-    h1 {
-      margin: 0 0 0.65rem;
-      font-size: clamp(2rem, 5vw, 3.25rem);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-shadow:
-        0 0 10px rgba(255, 140, 40, 0.14),
-        0 0 24px rgba(255, 120, 20, 0.08);
-    }
+h1{
+margin:0 0 .65rem;
+font-size:clamp(2rem,5vw,3.25rem);
+letter-spacing:.04em;
+}
 
-    p {
-      margin: 0 auto 1.25rem;
-      max-width: 34rem;
-      line-height: 1.6;
-      font-size: clamp(1rem, 2.4vw, 1.15rem);
-      color: var(--muted);
-    }
+p{
+margin:0 auto 1.25rem;
+max-width:34rem;
+line-height:1.6;
+font-size:clamp(1rem,2.4vw,1.15rem);
+color:var(--muted);
+}
 
-    .btn {
-      display: inline-block;
-      padding: 0.85rem 1.2rem;
-      border: 1px solid var(--button-border);
-      border-radius: 999px;
-      background: var(--button-bg);
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.98rem;
-      letter-spacing: 0.05em;
-      backdrop-filter: blur(6px);
-      transition: background 160ms ease, transform 160ms ease, border-color 160ms ease;
-      box-shadow: 0 0 18px rgba(255, 120, 30, 0.08);
-    }
+.btn{
+display:inline-block;
+padding:.85rem 1.2rem;
+border:1px solid var(--button-border);
+border-radius:999px;
+background:var(--button-bg);
+color:var(--text);
+text-decoration:none;
+font-size:.98rem;
+letter-spacing:.05em;
+backdrop-filter:blur(6px);
+transition:.15s;
+}
 
-    .btn:hover,
-    .btn:focus-visible {
-      background: var(--button-hover);
-      border-color: rgba(255, 190, 120, 0.6);
-      transform: translateY(-1px);
-      outline: none;
-    }
+.btn:hover{
+background:var(--button-hover);
+transform:translateY(-1px);
+}
 
-    .subtle {
-      display: block;
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      color: rgba(244, 230, 211, 0.55);
-      letter-spacing: 0.04em;
-    }
+.subtle{
+display:block;
+margin-top:1rem;
+font-size:.85rem;
+color:rgba(244,230,211,.55);
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
+}
+</style>
 </head>
 
 <body>
 
-<audio id="bg-music" preload="auto" loop>
-  <source src="full-of-stars.mp3" type="audio/mpeg">
+<!-- AUDIO -->
+<audio id="bgMusic" autoplay loop>
+<source src="Full Of Stars.mp3" type="audio/mpeg">
 </audio>
 
 <div class="forge-glow"></div>
 <canvas id="embers"></canvas>
 
 <main class="content">
-  <h1>You have discovered a Forge Token.</h1>
 
-  <p>
-    This coin was created at the WunderPlay Workshop.
-    If it found its way to you, the forge is still burning.
-  </p>
+<h1>You have discovered a Forge Token.</h1>
 
-  <a class="btn" href="https://instagram.com/wunderplayworkshop" id="enterBtn">
-    Enter the Workshop
-  </a>
+<p>
+This coin was created at the WunderPlay Workshop.
+If it found its way to you, the forge is still burning.
+</p>
 
-  <span class="subtle">WunderPlayWorkshop</span>
+<a class="btn" href="https://instagram.com/wunderplayworkshop">
+Enter the Workshop
+</a>
+
+<span class="subtle">WunderPlayWorkshop</span>
+
 </main>
 
 <script>
-const music = document.getElementById("bg-music");
-const btn = document.getElementById("enterBtn");
 
-btn.addEventListener("click", function () {
-    music.volume = 0.5;
-    music.play();
+const music=document.getElementById("bgMusic");
+
+music.volume=0.5;
+
+/* attempt autoplay */
+music.play().catch(()=>{
+
+console.log("Autoplay blocked — waiting for interaction.");
+
+document.body.addEventListener("click",()=>{
+music.play();
+},{once:true});
+
 });
+
 </script>
 
 </body>
